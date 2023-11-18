@@ -1,0 +1,33 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        //base case 
+        if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+    vector<int>ans;
+   unordered_map<int,int>m;
+    ListNode* temp=head;
+    while(temp!=NULL)
+    {
+        m[temp->val]++;
+        temp=temp->next;
+    }
+    for(auto i:m)
+    {
+        if(i.second==1)
+        ans.push_back(i.first);
+    }
+    sort(ans.begin(),ans.end());
+    ListNode* dumy=new ListNode(0);
+    ListNode* dummy=dumy;
+    for(int i=0;i<ans.size();i++)
+    {
+        dumy->next=new ListNode(ans[i]);
+        dumy=dumy->next;
+    }
+    return dummy->next;
+        
+    }
+};
